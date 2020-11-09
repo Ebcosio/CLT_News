@@ -1,0 +1,14 @@
+/*
+Theme Name:   twentyseventeenchild
+Description:  Write here a brief description about your child-theme
+Author:       Eric Cosio
+Author URL:   Write here the author's blog or website url
+Template:     twentyseventeen
+Version:      1.0
+License:      GNU General Public License v2 or later
+License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain:  twentyseventeenchild
+*/
+
+/* Write here your own personal stylesheet */
+ .register-link a{text-decoration: underline; color: blue !important;}
