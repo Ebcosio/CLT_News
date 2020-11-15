@@ -1,3 +1,5 @@
+
+
 /*
 Theme Name:   twentyseventeenchild
 Description:  Write here a brief description about your child-theme
@@ -11,4 +13,32 @@ Text Domain:  twentyseventeenchild
 */
 
 /* Write here your own personal stylesheet */
- .register-link a{text-decoration: underline; color: blue !important;}
+ .register-link a{text-decoration: underline; color: blue !important; float: left;}
+
+
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion {
+  background-color: #D3D3D3;
+  color: black;
+	float: left; 
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: center;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.accordion:hover {
+  background-color: #ccc;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+div.panel-hidden{
+  padding: 0 18px;
+  background-color: #F5F5F5;
+ /* display: none; */
+  overflow: auto;
+}
