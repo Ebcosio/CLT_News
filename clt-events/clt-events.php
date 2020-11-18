@@ -23,4 +23,14 @@ require_once CLT_EVENTS_DIR . '/inc/utils/index.php';
 require_once CLT_EVENTS_DIR . '/inc/ces-data/client.php'; // Exposes CES_API globally.
 require_once CLT_EVENTS_DIR . '/inc/ces-data/templating.php';
 
+
+
+add_action('wp_enqueue_scripts', function() {
+    wp_enqueue_script('ces_events_accordion', plugins_url( '/assets/js/accordion.js' , __FILE__ ), [], null, TRUE );
+});
+
+add_action('wp_enqueue_styles', function() {
+    wp_enqueue_style( 'ces_events_accordion_style', plugins_url( '/assets/css/accordion.css' , __FILE__ ), [], null );
+});
+
 ?>
