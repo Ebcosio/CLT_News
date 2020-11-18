@@ -15,9 +15,15 @@ Text Domain:  twentyseventeenchild
 /* Write here your own personal stylesheet */
  .register-link a{text-decoration: underline; color: blue !important; float: left;}
 
+ li.ces-event {
+  list-style: none;
+  display: inline-block;
+  margin-bottom: 5%;
+}
+
 
 /* Style the buttons that are used to open and close the accordion panel */
-.accordion {
+.ces-event-accordion {
   background-color: #D3D3D3;
   color: black;
 	float: left; 
@@ -31,12 +37,17 @@ Text Domain:  twentyseventeenchild
 }
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.accordion:hover {
+.ces-event-accordion:hover {
   background-color: #ccc;
 }
 
+.ces-event .panel ul, .ces-event .panel ol {
+  position: relative;
+  left: 1em;
+}
+
 /* Style the accordion panel. Note: hidden by default */
-div.panel-hidden{
+.ces-event .panel.hidden{
   padding: 0 18px;
   background-color: #F5F5F5;
  /* display: none; */

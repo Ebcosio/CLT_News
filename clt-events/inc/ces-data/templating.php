@@ -11,6 +11,33 @@ defined('ABSPATH') || die;
  * shortcode function definitions
  */
 
+function ces_events_shortcode_js() {
+?><script>
+(function () {
+    "use strict";
+    var acc = document.getElementsByClassName("ces-event-accordion");
+    var i;
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function() {
+        /* Toggle between adding and removing the "active" class,
+        to highlight the button that controls the panel */
+        // this.classList.toggle("active");
+    
+        /* Toggle between hiding and showing the active panel */
+        var panel = this.nextElementSibling;
+        if (panel.style.display === "block") {
+          panel.style.display = "none";
+        } else {
+          panel.style.display = "block";
+        }
+      });
+    }
+})();
+</script><?php
+}
+
+add_action('wp_footer', 'ces_events_shortcode_js');
+
 // Add Shortcode
 function ces_events_shortcode( $atts ) {
 
@@ -44,18 +71,20 @@ function ces_events_shortcode( $atts ) {
         <?php if ( !$event["is_cancelled"]) : ?>
          <li class="ces-event">
              <h3><?php echo esc_html($event['title']); ?></h3>
-             <span class="ces-event-delivery-types">
-                 <?php echo CES_API::format_delivery_methods($event['delivery_styles']); ?>
-            </span>
-             <span class="ces-event-dates"><?php echo $event['event_dates']; ?></span>
-             <a class="ces-event-register-link register-link" target="_blank"
-                href="<?php echo CES_API::link_to_ces_event($event['id']) ?>">
-                <?php _e('Register for this event', CLT_EVENTS_TRANS); ?>
-             </a>
-             <button class="accordion">
+             <p class="ces-event-info">
+                 <span class="ces-event-delivery-types">
+                     <?php echo CES_API::format_delivery_methods($event['delivery_styles']); ?>
+                </span>
+                 <span class="ces-event-dates"><?php echo $event['event_dates']; ?></span>
+                 <a class="ces-event-register-link register-link" target="_blank"
+                    href="<?php echo CES_API::link_to_ces_event($event['id']) ?>">
+                    <?php _e('Register for this event', CLT_EVENTS_TRANS); ?>
+                 </a>
+             </p>
+             <button class="ces-event-accordion">
                  <?php _e('Description and objectives', CLT_EVENTS_TRANS); ?>
             </button>
-             <div class="panel-hidden">
+             <div class="panel hidden" style="display:none;">
                 <?php echo wp_kses_post($event['description']); ?>            
              </div>
         </li>
