@@ -24,6 +24,9 @@
       var target = event.target;
       console.log(target);
   
+      // Check if this click event happend on the open/close button
+      // @NOTE: This is rigid because it does not handle the case when
+      // a child of the .Accordion-trigger element is clicked.
       if (target.classList.contains('Accordion-trigger')) {
         // Check if the current toggle is expanded.
         var isExpanded = target.getAttribute('aria-expanded') == 'true';
@@ -42,7 +45,7 @@
           }
         }
   
-        if (!isExpanded) {
+        if (!isExpanded) { // User is trying to open
           // Set the expanded state on the triggering element
           target.setAttribute('aria-expanded', 'true');
           // Hide the accordion sections, using aria-controls to specify the desired section
