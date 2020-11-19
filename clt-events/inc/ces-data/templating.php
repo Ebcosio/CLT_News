@@ -66,10 +66,7 @@ Ex:
             class="Accordion-trigger"
             aria-controls="event-desc-<?php echo esc_attr($event['id']); ?>"
             id="event-desc-trigger-<?php echo esc_attr($event['id']); ?>">
-    <span class="Accordion-title">
-        <?php _e('Description and objectives', CLT_EVENTS_TRANS); ?>
-        <span class="Accordion-icon"></span>
-    </span>
+    <?php _e('Description and objectives', CLT_EVENTS_TRANS); ?>
     </button>
     <div id="event-desc-<?php echo esc_attr($event['id']); ?>"
         role="region"
