@@ -53,7 +53,7 @@ Ex:
 <div id="accordionGroup" class="Accordion" data-allow-multiple>
 <div id="accordionGroup" class="Accordion" data-allow-toggle>
 -->
-<div id="accordionGroup" class="Accordion">
+<div id="accordionGroup" class="Accordion" data-allow-toggle>
     <?php foreach ($events as $event): ?>
     <h3><?php echo esc_html($event['title']); ?></h3>
     <p class="ces-event-info">
