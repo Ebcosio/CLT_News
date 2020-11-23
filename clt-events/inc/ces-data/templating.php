@@ -57,10 +57,10 @@ Ex:
     <?php foreach ($events as $event): ?>
    <li> <h3 id="title-heading"><?php echo esc_html($event['title']); ?></h3>
     <p class="ces-event-info">
-        <span class="ces-event-delivery-types">
+        <span class="ces-event-delivery-types" aria-label="format of delivery for this event">
             <?php echo CES_API::format_delivery_methods($event['delivery_styles']); ?>
         </span>
-        <span class="ces-event-dates"><?php echo $event['event_dates']; ?></span>
+        <span class="ces-event-dates" aria-label="dates for this event"><?php echo $event['event_dates']; ?></span>
     </p>
     <button aria-expanded="false"
             class="Accordion-trigger"
