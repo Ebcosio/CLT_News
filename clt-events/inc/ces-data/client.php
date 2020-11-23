@@ -24,6 +24,7 @@ class CES_API {
         }
 
         // @TODO: instantiate a data structure to cache event data after http requests
+        // this is very good for the requests for a date range on the archival pages, but will we need a cache for the Curren Events query? 
     }
    
     /**
@@ -55,7 +56,7 @@ class CES_API {
         $defaults = [
             'start_date' => (new DateTime())->format('Y-m-d'),
             'end_date'   => null,
-            'limit'      => 5,
+            'limit'      => 5,  // what does the limit argument do?  EC 
         ];
         // Validate arguments, fall back to default as needed
         $args['start_date'] = CES_API::merge_valid_date_param($defaults['start_date'], $args['start_date']);
