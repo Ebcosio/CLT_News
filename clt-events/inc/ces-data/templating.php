@@ -53,9 +53,9 @@ Ex:
 <div id="accordionGroup" class="Accordion" data-allow-multiple>
 <div id="accordionGroup" class="Accordion" data-allow-toggle>
 -->
-<div id="accordionGroup" class="Accordion" data-allow-toggle>
+<div id="accordionGroup" class="Accordion" data-allow-toggle><ul>
     <?php foreach ($events as $event): ?>
-    <h3><?php echo esc_html($event['title']); ?></h3>
+   <li> <h3 id="title-heading"><?php echo esc_html($event['title']); ?></h3>
     <p class="ces-event-info">
         <span class="ces-event-delivery-types">
             <?php echo CES_API::format_delivery_methods($event['delivery_styles']); ?>
@@ -80,11 +80,13 @@ Ex:
         </div>
     </div>
     <a class="ces-event-register-link register-link" target="_blank"
-            href="<?php echo CES_API::link_to_ces_event($event['id']) ?>">
+            href="<?php echo CES_API::link_to_ces_event($event['id']) ?>"
+            aria-labelledby="register for title-heading" 
+            >
             <?php _e('Register for this event', CLT_EVENTS_TRANS); ?>
-    </a>
+	   </a> </li>
     <?php endforeach; ?>
-</div>
+	</ul></div>
 
 <?php
     $ob_str = ob_get_contents();
