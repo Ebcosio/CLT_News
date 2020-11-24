@@ -75,7 +75,7 @@ Ex:
         hidden
         >
         <div>
-            <!-- Variable content within section, may include any type of markup or interactive widgets. -->
+            <!-- Variable content within section, may include any type of markup-->
             <?php echo wp_kses_post($event['description']); ?>
         </div>
     </div>
