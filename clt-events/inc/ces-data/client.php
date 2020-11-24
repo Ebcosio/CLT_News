@@ -134,6 +134,20 @@ class CES_API {
         }
         return  $out;
     }
+
+    /**
+     * For templating, determine if the user should be given the option to register for
+     * a given event
+     * @param array - an Event record, as returned by CES_API::get_events()
+     * @return Boolean - whether the user can register for an event
+     */
+    public static function should_offer_registration($event) {
+        try {
+            return $event['is_reg_closed'] ||  $event['is_event_over'] || $event['is_cancelled'];
+        } catch(Exception $e) {
+            return false;
+        }
+    }
     
     /**
      * To validate a date string and use a provided fallback if validation fails.

@@ -79,12 +79,18 @@ Ex:
             <?php echo wp_kses_post($event['description']); ?>
         </div>
     </div>
-    <a class="ces-event-register-link register-link" target="_blank"
-            href="<?php echo CES_API::link_to_ces_event($event['id']) ?>"
-            aria-labelledby="title-heading-<?php echo esc_attr($event['id']); ?>" 
-            >
-            <?php _e('Register for this event', CLT_EVENTS_TRANS); ?>
-	   </a> </li>
+    <?php $offer_registration = CES_API::should_offer_registration($event); ?>
+    <a class="ces-event-register-link <?php echo (($offer_registration) ? 'register-link' : 'info-link'); ?>"
+        target="_blank"
+        href="<?php echo CES_API::link_to_ces_event($event['id']) ?>"
+        aria-labelledby="title-heading-<?php echo esc_attr($event['id']); ?>"
+    >
+            <?php if( $offer_registration ) : ?>
+                <?php _e('Register for this event', CLT_EVENTS_TRANS); ?>
+            <?php else : ?>
+                <? _e('Get information', CLT_EVENTS_TRANS); ?>
+            <?php endif; ?>
+    </a>
     <?php endforeach; ?>
 	</ul></div>
 
