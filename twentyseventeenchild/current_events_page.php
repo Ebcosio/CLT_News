@@ -44,45 +44,10 @@ get_header(); ?>
 				
 	<h2>Events</h2>
 			</div>
- 
-			
-<?php 
-	$args = array(
-	// add timeout arg
-	'timeout' => 120,
-	);		
-			
-			
-	$response = wp_remote_get( 'https://clt.odu.edu/events/events/json', $args );
-  //$status = wp_remote_retrieve_header( $response, 'status');
-  
-			
-		   if(is_wp_error($response)){
-			//	$obj->error = true;
-             //   $obj->message = 'Data currently unavailable';
-			 //  $events = json_encode($obj);
-			
-			// add error handler and timeout handler
-		   }
-			else {
-			$events = wp_remote_retrieve_body( $response ); 
-		   	   }
-	
-			?>
-                    
-				
-			
-<script>
-	 // function call from script sheet parse_events.js
-	 var eventsJson = <?php echo $events ?>;
-	 parseEvents(eventsJson);
-	
-	
-	</script> 
+	<?php 
+	// Get event data from CES and display it
+	echo do_shortcode( '[ces_events]');
 
-		
-
-			<?php
 			while ( have_posts() ) :
 				the_post();
                 // add custom template part for these posts
