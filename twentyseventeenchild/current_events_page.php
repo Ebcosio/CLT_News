@@ -1,3 +1,4 @@
+
 <?php /* Template Name: Current_events_page */ ?>
 
 <?php
@@ -20,7 +21,10 @@ get_header(); ?>
 	<div id="primary" class="content-area" style="width: 75%; float: left;">
 		<main id="main" class="site-main" role="main">
 
-<div class="announcements-wrapper">
+<div class="announcements-wrapper" role="region" aria-label="section for CLT Announcements ">
+	<h2>
+		Announcements from CLT
+	</h2>
 	<?php 
 	   $query2 = new WP_Query( array( 'category_name' => 'Announcements' ) );   
 			
@@ -29,9 +33,9 @@ get_header(); ?>
 			while ( $query2->have_posts() ) {
    				 $query2->the_post();
 				
-				// add custom template part for Announcement posts, or custom post type with appropriate styling
-				get_template_part( 'template-parts/post/content', get_post_format() );
-  
+			?>	 <h3><?php echo get_the_title(); ?></h3>
+ 
+        <?php the_content(); 
 			
 		
 		}
@@ -40,17 +44,15 @@ get_header(); ?>
 	<hr>
 			</div>
 			
-			<div id="events-display">
-				
-	<h2>Events</h2>
-			</div>
-	<?php 
-	// Get event data from CES and display it
-	echo do_shortcode( '[ces_events]');
+		
+	           <h2>Events and Workshops</h2>
+				<?php echo do_shortcode( '[ces_events]'); ?>
+			                   
 
+			<?php
 			while ( have_posts() ) :
 				the_post();
-                // add custom template part for these posts
+                              // eventually delete some regular autopopulated page content, e.g. Search, Archives
 				get_template_part( 'template-parts/page/content', 'page' );
 
 				// If comments are open or we have at least one comment, load up the comment template.
@@ -63,21 +65,16 @@ get_header(); ?>
 </main><!-- #main -->
 		</div><!-- #primary -->
 			<?php //get_sidebar(); ?>
-	<div style="width: 25%; float: right;">
-	<aside  class="widget-area" role="complementary" style="padding-left: 50px;">
-<?php dynamic_sidebar( 'sidebar-1' ); ?>
-</aside>
-			</div>
-			
-		
 	
+	<aside  class="widget-area clt-sidebar" role="complementary" aria-label="CLT News sidebar">
+<?php dynamic_sidebar( 'sidebar-1' ); ?>
+		
+</aside>
+		
 </div><!-- .wrap -->
-
-
-
-
 
 
 <?php
 
 get_footer();
+
