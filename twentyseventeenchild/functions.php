@@ -15,7 +15,7 @@ if ( ! function_exists( 'suffice_child_enqueue_child_styles' ) ) {
 	      'parente2-style',
 	      get_template_directory_uri() . '/style.css'
 	    );
-     wp_enqueue_script('parse_events', get_theme_file_uri('/parse_events.js'), true);
+
 	    wp_enqueue_style( 'parente2-style' );
 	    // loading child style
 	    wp_register_style(
