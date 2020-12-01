@@ -1,3 +1,6 @@
 ./ces-stub-server/node_modules
 ./ces-stub-server/npm-debug.log
 ces-stub-server/node_modules
+data-in
+wp-app
+wp-data

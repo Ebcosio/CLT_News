@@ -1,0 +1,43 @@
+version: '3.3'
+
+services:
+   db:
+     image: mysql:5.6
+     volumes:
+      # place a SQL dump or other data in data-in to import the data when container is first started
+       - ./data-in:/docker-entrypoint-initdb.d 
+       - ./wp-data:/var/lib/mysql # persist data outside of normal writable layer
+     environment:
+       MYSQL_ROOT_PASSWORD: somewordpress
+       MYSQL_DATABASE: staging
+       MYSQL_USER: wordpress
+       MYSQL_PASSWORD: wordpress
+   wordpress:
+     depends_on:
+       - db
+     image: wordpress:5.4.2-php7.2-apache
+     volumes:
+        # - ./wp-config/php.conf.uploads.ini:/usr/local/etc/php/conf.d/uploads.ini # how you might change a PHP config option
+        - ./wp-app:/var/www/html
+        - ./clt-events:/var/www/html/wp-content/plugins/clt-events # CLT events plugin
+        - ./twentyseventeenchild:/var/www/html/wp-content/themes/twentyseventeenchild # child theme
+     ports:
+       - "80:80"
+     environment:
+       WORDPRESS_DB_HOST: db:3306
+       WORDPRESS_DB_NAME: staging
+       WORDPRESS_DB_USER: wordpress
+       WORDPRESS_DB_PASSWORD: wordpress
+       WORDPRESS_DEBUG: "true"
+   ces-stub:
+    build: ./ces-stub-server
+    environment:
+      HOST: 'ces-stub'
+      PORT: '8080'
+    ports:
+      - 3232:8080
+   adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
