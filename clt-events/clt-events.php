@@ -22,6 +22,7 @@ define('CLT_EVENTS_TRANS', 'clt-events-plugin');
 require_once CLT_EVENTS_DIR . '/inc/utils/index.php';
 require_once CLT_EVENTS_DIR . '/inc/ces-data/client.php'; // Exposes CES_API globally.
 require_once CLT_EVENTS_DIR . '/inc/ces-data/templating.php';
+require_once CLT_EVENTS_DIR . '/inc/ces-data/event-cpt.php';
 
 
 

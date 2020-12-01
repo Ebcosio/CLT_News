@@ -8,6 +8,8 @@ Note: this function loads the parent stylesheet before, then child theme stylesh
 (leave it in place unless you know what you are doing.)
 */
 
+define('CLT_THEME_TRANS', 'CLT_THEME_TRANS');
+
 if ( ! function_exists( 'suffice_child_enqueue_child_styles' ) ) {
 	function twentyseventeenchild_enqueue_child_styles() {
 	    // loading parent style
