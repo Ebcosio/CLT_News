@@ -74,7 +74,7 @@ class CES_API {
             $url = $url . '?start_date=' . $args['start_date'];
             // The CES API does nothing with an end_date without a start_date, so nest our ifs
             if (isset($args['end_date'])) {
-                $url = $url . '&end_date=' . $args['start_date'];
+                $url = $url . '&end_date=' . $args['end_date'];
             }
         }
 
