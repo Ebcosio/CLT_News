@@ -56,6 +56,20 @@ static public function register() {
     );
     register_post_type( 'clt-events', $args );
 }
+
+static public function startDateFromSlug() {
+    global $post;
+    $post_slug = $post->post_name;
+    return $post_slug . '-1'; // Adding a day component to the slug
+}
+
+static public function endDateFromSlug() {
+    $start = CLT_Events_CPT::startDateFromSlug();
+    $date = new DateTime($start);
+    return $date->format( 'Y-m-t' ); // 't' gives no of days in the month
+}
+
+
 }
 
 
