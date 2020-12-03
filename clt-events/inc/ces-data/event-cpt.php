@@ -45,7 +45,7 @@ static public function register() {
         'show_in_menu'          => true,
         'menu_position'         => 10,
         'menu_icon'             => 'dashicons-calendar',
-        'show_in_admin_bar'     => false,
+        'show_in_admin_bar'     => true,
         'show_in_nav_menus'     => true,
         'can_export'            => false,
         'has_archive'           => true,
