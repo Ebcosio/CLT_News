@@ -1,7 +1,9 @@
 <?php
 
+class CLT_Events_CPT {
+
 // Register Custom Post Type
-function odu_clt_register_post_type_clt_event() {
+static public function register() {
 
     $labels = array(
         'name'                  => _x( 'CLT Events', 'Post Type General Name', CLT_EVENTS_TRANS ),
@@ -54,7 +56,9 @@ function odu_clt_register_post_type_clt_event() {
     );
     register_post_type( 'clt-events', $args );
 }
+}
 
-add_action( 'init', 'odu_clt_register_post_type_clt_event', 0 );
+
+add_action( 'init', ['CLT_Events_CPT', 'register'], 0 );
 
 ?>
