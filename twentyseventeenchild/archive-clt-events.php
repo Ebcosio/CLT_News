@@ -1,56 +1,115 @@
-<?php
+<?php 
 /**
- * The template for displaying archive for CLT events
- *
+ * 1. shortcode function definitions
+ * 2. template function definitions
  */
 
-get_header(); ?>
 
-<div class="wrap">
+defined('ABSPATH') || die;
 
-  <?php if ( have_posts() ) : ?>
-    <header class="page-header">
-      <?php
-        the_archive_title( '<h1 class="page-title">', '</h1>' );
-        the_archive_description( '<div class="taxonomy-description">', '</div>' );
-      ?>
-    </header><!-- .page-header -->
-  <?php endif; ?>
+/**********************************************
+ * shortcode function definitions
+ */
 
-  <div id="primary" class="content-area">
-    <main id="main" class="site-main" role="main">
-    <?php
-    // The actual "archive" part - list clt-events CPTs, which represent monthly archives
-    // of events from CLT. Each CPT archive is populated with data from CES.
-    if ( have_posts() ) : ?>
-      <?php
-      // Start the Loop.
-      while ( have_posts() ) :
-        the_post(); ?>
-    <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
 
-    <?php   
-      endwhile;
+// Add Shortcode
+function ces_events_shortcode( $atts ) {
 
-      the_posts_pagination(
-        array(
-          'prev_text'          => twentyseventeen_get_svg( array( 'icon' => 'arrow-left' ) ) . '<span class="screen-reader-text">' . __( 'Previous page', 'twentyseventeen' ) . '</span>',
-          'next_text'          => '<span class="screen-reader-text">' . __( 'Next page', 'twentyseventeen' ) . '</span>' . twentyseventeen_get_svg( array( 'icon' => 'arrow-right' ) ),
-          'before_page_number' => '<span class="meta-nav screen-reader-text">' . __( 'Page', 'twentyseventeen' ) . ' </span>',
-        )
-      );
+	// Attributes
+	$atts = shortcode_atts(
+		array(
+			'start_date' => null,
+            'end_date'   => null,
+            'limit'      => 5,
+		),
+		$atts,
+		'ces_events'
+    );
 
-    else :
+    $CES = CES_API::get_instance();
+    $events = $CES->get_events([
+        'start_date' => $atts['start_date'],
+        'end_date'   => $atts['end_date'],
+        'limit'      => $atts['limit'],
+    ]);
 
-      get_template_part( 'template-parts/post/content', 'none' );
+    if ($events == -1) {
+        return '<div class="ces-shortcode"><p class="error">' . __('Error encountered when displaying events', CLT_EVENTS_TRANS) . '</p></div>';
+    }
 
-    endif;
-    ?>
+    // var_dump($events);
+    ob_start();
+?>
 
-    </main><!-- #main -->
-  </div><!-- #primary -->
-  <?php get_sidebar(); ?>
-</div><!-- .wrap -->
+<!-- Accordion Configuration Options
+
+data-allow-toggle
+Allow for each toggle to both open and close its section. Makes it possible for all sections to be closed. Assumes only one section may be open.
+
+data-allow-multiple
+Allow for multiple accordion sections to be expanded at the same time. Assumes data-allow-toggle otherwise the toggle on open sections would be disabled.
+
+Ex:
+<div id="accordionGroup" class="Accordion" data-allow-multiple>
+<div id="accordionGroup" class="Accordion" data-allow-toggle>
+-->
+<div id="accordionGroup" class="Accordion" data-allow-toggle><ul>
+    <?php foreach ($events as $event): ?>
+   <li> <h3 id="title-heading-<?php echo esc_attr($event['id']); ?>"><?php echo esc_html($event['title']); ?></h3>
+    <p class="ces-event-info">
+        <span class="ces-event-delivery-types" aria-label="format of delivery for this event">
+			Delivery method: 
+            <?php echo CES_API::format_delivery_methods($event['delivery_styles']); ?>
+        </span><br/>
+        <span class="ces-event-dates" aria-label="dates for this event"> Event dates: <?php echo $event['event_dates']; ?></span>
+    </p>
+    <button aria-expanded="false"
+            class="Accordion-trigger"
+            aria-controls="event-desc-<?php echo esc_attr($event['id']); ?>"
+            id="event-desc-trigger-<?php echo esc_attr($event['id']); ?>">
+    <?php _e('Description and objectives', CLT_EVENTS_TRANS); ?>
+    </button>
+    <div id="event-desc-<?php echo esc_attr($event['id']); ?>"
+        role="region"
+        aria-labelledby="event-desc-trigger-<?php echo esc_attr($event['id']); ?>"
+        class="Accordion-panel"
+        hidden
+        >
+        <div>
+            <!-- Variable content within section, may include any type of markup-->
+            <?php echo wp_kses_post($event['description']); ?>
+        </div>
+    </div>
+    <?php $offer_registration = CES_API::should_offer_registration($event); ?>
+	    <?php $is_open = ($offer_registration) ? 'open' : 'closed'; ?>
+	   <p>
+		  Registration for this event is <?php echo $is_open  ?>
+	   </p>
+	    
+    <a class="ces-event-register-link <?php echo (($offer_registration) ? 'register-link' : 'info-link'); ?>"
+        target="_blank"
+        href="<?php echo CES_API::link_to_ces_event($event['id']) ?>"
+        aria-labelledby="title-heading-<?php echo esc_attr($event['id']); ?>"
+    >
+            <?php if( $offer_registration ) : ?>
+		       
+                <?php _e('Register for this event', CLT_EVENTS_TRANS); ?>
+            <?php else : ?>
+                <? _e('Get information', CLT_EVENTS_TRANS); ?>
+            <?php endif; ?>
+    </a>
+    <?php endforeach; ?>
+	</ul></div>
 
 <?php
-get_footer();
+    $ob_str = ob_get_contents();
+    ob_end_clean();
+    return $ob_str;
+}
+
+add_shortcode( 'ces_events', 'ces_events_shortcode' );
+
+
+/**********************************************
+ * template function definitions
+ */

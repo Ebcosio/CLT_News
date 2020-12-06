@@ -35,7 +35,11 @@ get_header(); ?>
 
         </main><!-- #main -->
     </div><!-- #primary -->
-    <?php get_sidebar(); ?>
+   <aside  class="widget-area clt-sidebar" role="complementary" aria-label="CLT News sidebar">
+<?php dynamic_sidebar( 'sidebar-1' ); ?>
+		
+</aside>
+	
 </div><!-- .wrap -->
 
 <?php
