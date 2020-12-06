@@ -58,9 +58,10 @@ Ex:
    <li> <h3 id="title-heading-<?php echo esc_attr($event['id']); ?>"><?php echo esc_html($event['title']); ?></h3>
     <p class="ces-event-info">
         <span class="ces-event-delivery-types" aria-label="format of delivery for this event">
+			Delivery method: 
             <?php echo CES_API::format_delivery_methods($event['delivery_styles']); ?>
-        </span>
-        <span class="ces-event-dates" aria-label="dates for this event"><?php echo $event['event_dates']; ?></span>
+        </span><br/>
+        <span class="ces-event-dates" aria-label="dates for this event"> Event dates: <?php echo $event['event_dates']; ?></span>
     </p>
     <button aria-expanded="false"
             class="Accordion-trigger"
@@ -80,12 +81,18 @@ Ex:
         </div>
     </div>
     <?php $offer_registration = CES_API::should_offer_registration($event); ?>
+	    <?php $is_open = ($offer_registration) ? 'open' : 'closed'; ?>
+	   <p>
+		  Registration for this event is <?php echo $is_open  ?>
+	   </p>
+	    
     <a class="ces-event-register-link <?php echo (($offer_registration) ? 'register-link' : 'info-link'); ?>"
         target="_blank"
         href="<?php echo CES_API::link_to_ces_event($event['id']) ?>"
         aria-labelledby="title-heading-<?php echo esc_attr($event['id']); ?>"
     >
             <?php if( $offer_registration ) : ?>
+		       
                 <?php _e('Register for this event', CLT_EVENTS_TRANS); ?>
             <?php else : ?>
                 <? _e('Get information', CLT_EVENTS_TRANS); ?>
