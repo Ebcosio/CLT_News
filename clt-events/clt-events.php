@@ -50,6 +50,21 @@ function enqueue_accordion_style() {
 
 add_action( 'wp_enqueue_scripts', 'enqueue_accordion_style' );
 
+// note, calling the TNP_Composer method from this file, the index; seems to not work when called from /newsletter directory
+function create_newsletter_blocks() {   
+if (class_exists('TNP_Composer') ) {
+        // Add our blocks, one-by-one
+        
+       // TNP_Composer::register_block(CLT_EVENTS_DIR . '/inc/newsletter/blocks/events-fetch');
+        TNP_Composer::register_block(CLT_EVENTS_DIR . '/inc/newsletter/blocks/register');
+       TNP_Composer::register_block(CLT_EVENTS_DIR . '/inc/newsletter/blocks/salutation-text');
+       TNP_Composer::register_block(CLT_EVENTS_DIR . '/inc/newsletter/blocks/signature-panel');
+       
+    
+        }
+}
+add_action('newsletter_register_blocks', 'create_newsletter_blocks');
+
 
 
 ?>
