@@ -11,3 +11,7 @@ Text Domain:  Baskervillechild
 */
 
 /* Write here your own personal stylesheet */
+
+.content.fleft {
+    width: 70%;
+}

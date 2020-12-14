@@ -20,7 +20,7 @@ services:
         # - ./wp-config/php.conf.uploads.ini:/usr/local/etc/php/conf.d/uploads.ini # how you might change a PHP config option
         - ./wp-app:/var/www/html
         - ./clt-events:/var/www/html/wp-content/plugins/clt-events # CLT events plugin
-        - ./twentyseventeenchild:/var/www/html/wp-content/themes/twentyseventeenchild # child theme
+        - ./Baskervillechild:/var/www/html/wp-content/themes/Baskervillechild # child theme
      ports:
        - "80:80"
      environment:
