@@ -50,19 +50,14 @@
 
 					<!--<<?php //echo $blog_title_elem; ?> class="<?php // echo esc_attr( $blog_title_class ); ?>">-->
 					
-						<a class="logo" href="https://clt.odu.edu/" target="_self" >
-							<img src="<?php echo esc_url( $custom_logo_url ); ?>" role="link">
+						<!--   empty alt attribute in anchor, img already has alt, need inline styling to override theme css    -->
+						<a class="logo logo-link" href="https://clt.odu.edu/" target="_self" alt=""
+						style="display: block; max-width: 450px; margin-left: auto; margin-right: auto;" >
+							<img src="<?php echo esc_url( $custom_logo_url ); ?>" alt="CLT logo and link to CLT homepage">
 							<span class="screen-reader-text"><?php echo $blog_title; ?></span>
 						
 						</a>
 						
-						<!--     add in ODU header to float right in the header        -->
-						<!--   style="width: auto; margin-left: auto; margin-right: auto;"   -->
-						<a class="logo" href="https://clt.odu.edu/" target="_self" style="float: right;">
-							<img src="" role="link">
-							<span class="screen-reader-text"><?php echo $blog_title; ?></span>
-						
-						</a>
 						
 						
 					<!--</<?php //echo $blog_title_elem; ?>>-->

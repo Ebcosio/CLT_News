@@ -12,6 +12,25 @@ Text Domain:  Baskervillechild
 
 /* Write here your own personal stylesheet */
 
+/*
 .content.fleft {
     width: 70%;
 }
+*/
+
+/*logo-link{display: block; max-width: 450px; margin-left: auto; margin-right: auto;}*/
+logo-link {display: block; max-width: 450px; margin-left: auto; margin-right: auto;}
+
+address {
+    margin-bottom: 50px;
+    font-style: normal;
+    line-height: 1;
+   
+	color: white;
+}
+
+
+div.footer {background-color: #003057;}
+
+
+
