@@ -50,13 +50,20 @@
 
 					<!--<<?php //echo $blog_title_elem; ?> class="<?php // echo esc_attr( $blog_title_class ); ?>">-->
 					
-						<a class="logo" href="https://clt.odu.edu/" target="_self" style="width: auto; margin-left: auto; margin-right: auto;">
+						<a class="logo" href="https://clt.odu.edu/" target="_self" >
 							<img src="<?php echo esc_url( $custom_logo_url ); ?>" role="link">
 							<span class="screen-reader-text"><?php echo $blog_title; ?></span>
 						
 						</a>
 						
 						<!--     add in ODU header to float right in the header        -->
+						<!--   style="width: auto; margin-left: auto; margin-right: auto;"   -->
+						<a class="logo" href="https://clt.odu.edu/" target="_self" style="float: right;">
+							<img src="" role="link">
+							<span class="screen-reader-text"><?php echo $blog_title; ?></span>
+						
+						</a>
+						
 						
 					<!--</<?php //echo $blog_title_elem; ?>>-->
                         <h1 style="text-align: center; color: white; margin: 30px;"><?php echo $blog_title; ?></h1>
