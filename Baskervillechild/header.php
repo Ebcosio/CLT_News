@@ -24,20 +24,19 @@
 		<a class="skip-link button" href="#site-content"><?php _e( 'Skip to the content', 'baskerville' ); ?></a>
 
 		<div class="header section small-padding bg-dark bg-image" style="background-image: url( <?php echo esc_url( $background_image_url ); ?> ); ">
-
+           
 			<div class="cover"></div>
-
+            
 			<div class="header-search-block bg-graphite hidden">
 				<?php get_search_form(); ?>
-			</div><!-- .header-search-block -->
+			</div><!-- .header-search-block --> 
 
-			<div class="header-inner section-inner">
-
+            <div class="header-inner section-inner">
 				<?php
 
 				$custom_logo_id 	= get_theme_mod( 'custom_logo' );
 				$legacy_logo_url 	= get_theme_mod( 'baskerville_logo' );
-				$blog_title_elem 	= ( ( is_front_page() || is_home() ) && ! is_page() ) ? 'h1' : 'div';
+				//$blog_title_elem 	= ( ( is_front_page() || is_home() ) && ! is_page() ) ? 'h1' : 'div';
 				$blog_title_class 	= $custom_logo_id ? 'blog-logo' : 'blog-title';
 
 				$blog_title 		= get_bloginfo( 'title' );
@@ -49,19 +48,21 @@
 
 					?>
 
-					<<?php echo $blog_title_elem; ?> class="<?php echo esc_attr( $blog_title_class ); ?>">
-					<div style="float: left; height: 100%;">
-						<a class="logo" href="https://clt.odu.edu/" target="_self" >
-							<img src="<?php echo esc_url( $custom_logo_url ); ?>">
+					<!--<<?php //echo $blog_title_elem; ?> class="<?php // echo esc_attr( $blog_title_class ); ?>">-->
+					
+						<a class="logo" href="https://clt.odu.edu/" target="_self" style="width: auto; margin-left: auto; margin-right: auto;">
+							<img src="<?php echo esc_url( $custom_logo_url ); ?>" role="link">
 							<span class="screen-reader-text"><?php echo $blog_title; ?></span>
-						</a></div>
-					</<?php echo $blog_title_elem; ?>>
+						
+						</a>
+						
+						<!--     add in ODU header to float right in the header        -->
+						
+					<!--</<?php //echo $blog_title_elem; ?>>-->
+                        <h1 style="text-align: center; color: white; margin: 30px;"><?php echo $blog_title; ?></h1>
 
-				<?php elseif ( $blog_description || $blog_title ) : ?>
+				<?php elseif ( $blog_description ) : ?>
 
-					<<?php echo $blog_title_elem; ?> class="<?php echo esc_attr( $blog_title_class ); ?>">
-						<a href="<?php echo esc_url( home_url() ); ?>" rel="home"><?php echo $blog_title; ?></a>
-					</<?php echo $blog_title_elem; ?>>
 
 					<?php if ( $blog_description ) : ?>
 						<h3 class="blog-description"><?php echo $blog_description; ?></h3>
