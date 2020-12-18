@@ -149,6 +149,15 @@ class CES_API {
         }
     }
     
+    public static function in_progress_message($event){
+        
+        if($event['is_cancelled']){ echo 'This event has been cancelled.';}
+        else if($event['is_event_over']){ echo 'This event has concluded.  See CLT Events at https://clt.odu.edu/events/ for information other dates for this event, and other planned events';}
+        else if($event['is_event_started'] && !$event['is_event_over']){echo 'This event is now in progress';}
+        else {echo 'See CLT Events https://clt.odu.edu/events/ for more information';}
+        
+    }
+    
     /**
      * To validate a date string and use a provided fallback if validation fails.
      * @param string|null $default The value to use if validation of $provided fails.
