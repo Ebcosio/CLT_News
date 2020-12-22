@@ -143,7 +143,7 @@ class CES_API {
      */
     public static function should_offer_registration($event) {
         try {
-            return $event['is_reg_closed'] ||  $event['is_event_over'] || $event['is_cancelled'];
+            return !($event['is_reg_closed'] ||  $event['is_event_over'] || $event['is_cancelled']);
         } catch(Exception $e) {
             return false;
         }
