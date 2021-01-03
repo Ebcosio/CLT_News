@@ -13,8 +13,8 @@ $defaults = array(
     'url' => '',
     'width' => 0,
     'block_background' => '#ffffff',
-    'block_padding_left' => 0,
-    'block_padding_right' => 0,
+    'block_padding_left' => 10,
+    'block_padding_right' => 10,
     'block_padding_bottom' => 15,
     'block_padding_top' => 15
 );
