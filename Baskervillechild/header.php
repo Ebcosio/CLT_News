@@ -118,9 +118,9 @@
 
 				</ul><!-- .main-menu -->
 
-				<button class="search-toggle toggle fright">
-					<span class="screen-reader-text"><?php _e( 'Toggle search field', 'baskerville' ); ?></span>
-				</button>
+				<!--<button class="search-toggle toggle fright">
+					<span class="screen-reader-text"><?php // _e( 'Toggle search field', 'baskerville' ); ?></span>
+				</button>-->
 
 				<div class="clear"></div>
 
