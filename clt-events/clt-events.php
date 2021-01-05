@@ -60,6 +60,7 @@ if (class_exists('TNP_Composer') ) {
        TNP_Composer::register_block(CLT_EVENTS_DIR . '/inc/newsletter/blocks/signature-panel');
         TNP_Composer::register_block(CLT_EVENTS_DIR . '/inc/newsletter/blocks/single-workshop');
        TNP_Composer::register_block(CLT_EVENTS_DIR . '/inc/newsletter/blocks/clt-image');
+     TNP_Composer::register_block(CLT_EVENTS_DIR . '/inc/newsletter/blocks/two-column-event');
        
     
         }
