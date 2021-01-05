@@ -32,26 +32,59 @@ $options = array_merge($default_options, $options);
 
 <table class="form-table">
     <tr>
+      <td style="width: 100%; height: 100px; margin: 10px;">
+          <p>
+              Event Date
+               <?php $controls->textarea('date') ?>
+          </p>
+      </td>
 
-        <td style="width: 100%; margin: 10px;">
+        <td style="width: 100%;height: 100px;  margin: 10px;">
             <p>
                 Event title
                  <?php $controls->textarea('title') ?>
             </p>
         </td>
-        <td style="width: 100%; margin: 10px;">
+        <td style="width: 100%; height: 100px; margin: 10px;">
             <p>
                 Event info
                  <?php $controls->textarea('info') ?>
             </p>
         </td>
 
-         <td style="width: 100%; margin: 10px;">
+         <td style="width: 100%; height: 100px; margin: 10px;">
             <p>
                 Event href (enter as plain text)
                  <?php $controls->textarea('event_href') ?>
             </p>
         </td>
+
+        <td style="width: 100%; height: 100px; margin: 10px;">
+            <p>
+                Event 2 Date
+                 <?php $controls->textarea('date2') ?>
+            </p>
+        </td>
+
+          <td style="width: 100%;height: 100px;  margin: 10px;">
+              <p>
+                  Event 2 title
+                   <?php $controls->textarea('title2') ?>
+              </p>
+          </td>
+          <td style="width: 100%; height: 100px; margin: 10px;">
+              <p>
+                  Event 2 info
+                   <?php $controls->textarea('info2') ?>
+              </p>
+          </td>
+
+           <td style="width: 100%; height: 100px; margin: 10px;">
+              <p>
+                  Event 2 href (enter as plain text)
+                   <?php $controls->textarea('event_href2') ?>
+              </p>
+          </td>
 
 
         <td style="width: 100%; margin: 10px;">
