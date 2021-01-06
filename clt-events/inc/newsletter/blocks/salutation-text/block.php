@@ -21,7 +21,7 @@ $default_options = array(
     'font_color' => '#000'
 );
 
-$default_options[html] = '
+$default_options['html'] = '
 <h3>Department Chairs:</h3>
 <p style="font-size: 16px">Please share this timely news with your faculty, adjuncts, and staff.</p>
 <p style="font-size: 16px">All the best,</p>
