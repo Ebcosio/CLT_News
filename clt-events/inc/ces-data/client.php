@@ -56,7 +56,15 @@ class CES_API {
         $defaults = [
             'start_date' => (new DateTime())->format('Y-m-d'),
             'end_date'   => null,
-            'limit'      => 5,  // what does the limit argument do?  EC 
+        // Limits number of events returned by this method.
+        // a negative value means "unlimited"
+        //
+        // Implementation note: The limit parameter is not part of the API request.
+        // We just return a subarray of the response with the appropriate
+        // number of events in it. 
+        // Should CES implement a limit parameter,
+        // this code's behavior should be refactored to save bandwidth.
+            'limit'      => -1,
         ];
         // Validate arguments, fall back to default as needed
         $args['start_date'] = CES_API::merge_valid_date_param($defaults['start_date'], $args['start_date']);
@@ -101,6 +109,7 @@ class CES_API {
 
         // Handle limit on # of returned events
         // Move limit/pagination handling to API request parameters if they become available
+        // See comment at default limit option at beginning of method definition.
         $lim = $args['limit'];
         if ( isset($args['limit']) && 0 < $lim && $lim < count($events) ) {
             array_splice($events, $lim); // NOTE: if doing a request-level cache, return a deep copy instead instead of doing this

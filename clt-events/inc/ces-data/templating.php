@@ -20,7 +20,8 @@ function ces_events_shortcode( $atts ) {
 		array(
 			'start_date' => null,
             'end_date'   => null,
-            'limit'      => 5,
+              'limit'      => -1, // Limits number of events displayed
+                                  // a negative value means "unlimited"
 		),
 		$atts,
 		'ces_events'
