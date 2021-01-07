@@ -12,24 +12,6 @@ $default_options = array(
 $options = array_merge($default_options, $options);
 ?>
 
-<style>
-    .CodeMirror {
-        height: 400px;
-    }
-</style>
-
-<script>
-    var templateEditor;
-    jQuery(function () {
-        templateEditor = CodeMirror.fromTextArea(document.getElementById("options-html"), {
-            lineNumbers: true,
-            mode: 'htmlmixed',
-            lineWrapping: true,
-            extraKeys: {"Ctrl-Space": "autocomplete"}
-        });
-    });
-</script>
-
 <table class="form-table">
     <tr>
       <td style="width: 100%; height: 100px; margin: 10px;">
