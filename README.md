@@ -42,3 +42,8 @@ DNS and run the stub server on port `8080`.
 This stub server does not respect the query strings for `start_date` and
 `end_date` as the live API does.
 
+CES will receive updates, making the stub server's JSON schema out-of-date.
+To update the stub server, just copy a response from the CES events endpoint
+into `ces-stub-server/events.json`.
+
+
