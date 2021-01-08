@@ -45,18 +45,19 @@ $options = array_merge($default_options, $options);
          <p>Font Family (enter property value as font-family(s) and generic-family at the end): </p> <br/>
           <?php $controls->textarea('font_family') ?>
        </td>
+    </tr>
+    <tr>
        <td style="width: 100%; margin: 10px;">
          <p>Font size in pixels: </p> <br/>
            <?php $controls->text('font_size') ?>
        </td>
+    </tr>
+    <tr>
        <td style="width: 100%; margin: 10px;">
          <p>Font Color (as hex value, or html name): </p> <br/>
            <?php $controls->text('font_color') ?>
-       </td>
-       
+       </td>   
     </tr>
-    
-    
 </table>
 
 
