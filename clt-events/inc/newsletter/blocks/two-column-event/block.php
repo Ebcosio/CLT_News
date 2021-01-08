@@ -58,7 +58,7 @@ $options = array_merge($default_options, $options);
     <th style="font-size: 18px; font-weight: bold;"><?php echo $options['date2'] ?></th>
   </tr>
     
-    <tr>
+    <tr style="margin-top: 0;">
         <td width="50%"  align="center" inline-class="html-td" >
  
                <div style="border-right: solid #dddddd; border-right-width: 1px; padding: 15px; margin-bottom: 20px;">
