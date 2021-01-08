@@ -83,10 +83,7 @@ Ex:
     </div>
     <?php $offer_registration = CES_API::should_offer_registration($event); ?>
     
-    <p class="ces-event-message">
-         <?php  CES_API::in_progress_message($event); ?>
-        
-    </p>
+   
 	   
 	    
     <a class="ces-event-register-link <?php echo (($offer_registration) ? 'register-link' : 'info-link'); ?>"
