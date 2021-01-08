@@ -11,77 +11,86 @@ $default_options = array(
 
 $options = array_merge($default_options, $options);
 ?>
+<div class="tnp-field-row">
+    <h3>Event 1</h3>
+</div>
+<div class="tnp-field-row">
+    <div class="tnp-field-col-1">
+        <?php $fields->text('date', 'Date (event 1)') ?>
+    </div>
+</div>
+<div class="tnp-field-row">
+    <div class="tnp-field-col-1">
+        <?php $fields->textarea('title', 'Title (event 1)') ?>
+    </div>
+</div>
+<div class="tnp-field-row">
+    <div class="tnp-field-col-1">
+        <?php $fields->text('info', 'Info text (event 1)') ?>
+    </div>
+</div>
+<div class="tnp-field-row">
+    <div class="tnp-field-col-1">
+        <?php $fields->url('event_href', 'href (must have "https://" part)') ?>
+    </div>
+</div>
+<div class="tnp-field-row">
+    <div class="tnp-field-col-1">
+        <?php $fields->text('link_text', 'Link text  (event 1)') ?>
+    </div>
+</div>
 
+<hr>
+<div class="tnp-field-row">
+    <h3>Event 2</h3>
+</div>
+
+<div class="tnp-field-row">
+    <div class="tnp-field-col-1">
+        <?php $fields->text('date2', 'Date (event 2)') ?>
+    </div>
+</div>
+<div class="tnp-field-row">
+    <div class="tnp-field-col-1">
+        <?php $fields->textarea('title2', 'Title (event 2)') ?>
+    </div>
+</div>
+<div class="tnp-field-row">
+    <div class="tnp-field-col-1">
+        <?php $fields->text('info2', 'Info text (event 2)') ?>
+    </div>
+</div>
+<div class="tnp-field-row">
+    <div class="tnp-field-col-1">
+        <?php $fields->url('event_href2', 'href (must have "https://" part)') ?>
+    </div>
+</div>
+<div class="tnp-field-row">
+    <div class="tnp-field-col-1">
+        <?php $fields->text('link_text2', 'Link text (event 2)') ?>
+    </div>
+</div>
+<div class="tnp-field-row">
+    <h3>General</h3>
+</div>
 <table class="form-table">
     <tr>
-      <td>
-          <p>
-              Event Date
-               <?php $controls->textarea('date') ?>
-          </p>
-      </td>
-
-        <td>
-            <p>
-                Event title
-                 <?php $controls->textarea('title') ?>
-            </p>
-        </td>
-        <td>
-            <p>
-                Event info
-                 <?php $controls->textarea('info') ?>
-            </p>
-        </td>
-
-         <td>
-            <p>
-                Event href (enter as plain text)
-                 <?php $controls->textarea('event_href') ?>
-            </p>
-        </td>
-
-        <td>
-            <p>
-                Event 2 Date
-                 <?php $controls->textarea('date2') ?>
-            </p>
-        </td>
-
-          <td>
-              <p>
-                  Event 2 title
-                   <?php $controls->textarea('title2') ?>
-              </p>
-          </td>
-          <td>
-              <p>
-                  Event 2 info
-                   <?php $controls->textarea('info2') ?>
-              </p>
-          </td>
-
-           <td>
-              <p>
-                  Event 2 href (enter as plain text)
-                   <?php $controls->textarea('event_href2') ?>
-              </p>
-          </td>
-
-
-        <td>
+       <td>
          <p>Font Family (enter property value as font-family(s) and generic-family at the end): </p> <br/>
-          <?php $controls->textarea('font_family') ?>
+          <?php $controls->text('font_family') ?>
        </td>
+    </tr>
+    <tr>
        <td>
          <p>Font size in pixels: </p> <br/>
            <?php $controls->text('font_size') ?>
        </td>
+    </tr>
+    <tr>
        <td>
          <p>Font Color (as hex value, or html name): </p> <br/>
            <?php $controls->text('font_color') ?>
-       </td>
-
+       </td>    
     </tr>
 
 

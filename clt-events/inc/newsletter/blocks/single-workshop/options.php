@@ -12,54 +12,35 @@ $default_options = array(
 $options = array_merge($default_options, $options);
 ?>
 
-<style>
-    .CodeMirror {
-        height: 400px;
-    }
-</style>
+<div class="tnp-field-row">
+    <div class="tnp-field-col-1">
+        <?php $fields->text('date', 'Event date') ?>
+    </div>
+</div>
+<div class="tnp-field-row">
+    <div class="tnp-field-col-1">
+        <?php $fields->textarea('title', 'Event Title') ?>
+    </div>
+</div>
+<div class="tnp-field-row">
+    <div class="tnp-field-col-1">
+        <?php $fields->text('info', 'Event info') ?>
+    </div>
+</div>
+<div class="tnp-field-row">
+    <div class="tnp-field-col-1">
+        <?php $fields->url('event_href', 'Event href (must have "https://" part)') ?>
+    </div>
+</div>
+<div class="tnp-field-row">
+    <div class="tnp-field-col-1">
+        <?php $fields->text('link_text', 'Link text') ?>
+    </div>
+</div>
 
-<script>
-    var templateEditor;
-    jQuery(function () {
-        templateEditor = CodeMirror.fromTextArea(document.getElementById("options-html"), {
-            lineNumbers: true,
-            mode: 'htmlmixed',
-            lineWrapping: true,
-            extraKeys: {"Ctrl-Space": "autocomplete"}
-        });
-    });
-</script>
 
 <table class="form-table">
-    <tr>
-        <td style="width: 100%; margin: 10px;">
-            <p>
-                Event date(start)
-                 <?php $controls->text('html') ?>
-            </p>
-        </td>
-        
-        <td style="width: 100%; margin: 10px;">
-            <p>
-                Event title
-                 <?php $controls->text('html1') ?>
-            </p>
-        </td>
-        <td style="width: 100%; margin: 10px;">
-            <p>
-                Event info
-                 <?php $controls->textarea('html2') ?>
-            </p>
-        </td>
-        
-         <td style="width: 100%; margin: 10px;">
-            <p>
-                Event href (enter as plain text)
-                 <?php $controls->textarea('event_ref') ?>
-            </p>
-        </td>
-        
-        
+    <tr>        
         <td style="width: 100%; margin: 10px;">
          <p>Font Family (enter property value as font-family(s) and generic-family at the end): </p> <br/>
           <?php $controls->textarea('font_family') ?>
