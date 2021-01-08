@@ -44,8 +44,7 @@ $options = array_merge($default_options, $options);
 <style>
     .html-td {
         font-family: <?php echo $options['font_family']?>;
-        font-size: <?php echo $options['font_size']?>px;
-        color: <?php echo $options['font_color']?>;
+       
 
     }
 

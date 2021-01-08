@@ -80,19 +80,7 @@ $options = array_merge($default_options, $options);
           <?php $controls->text('font_family') ?>
        </td>
     </tr>
-    <tr>
-       <td>
-         <p>Font size in pixels: </p> <br/>
-           <?php $controls->text('font_size') ?>
-       </td>
-    </tr>
-    <tr>
-       <td>
-         <p>Font Color (as hex value, or html name): </p> <br/>
-           <?php $controls->text('font_color') ?>
-       </td>    
-    </tr>
-
+   
 
 </table>
 
