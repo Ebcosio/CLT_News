@@ -81,7 +81,7 @@
 			<div class="navigation-inner section-inner">
 
 				<button class="nav-toggle toggle fleft hidden">
-
+					<span class="screen-reader-text">Menu</span>
 					<div class="bar"></div>
 					<div class="bar"></div>
 					<div class="bar"></div>
