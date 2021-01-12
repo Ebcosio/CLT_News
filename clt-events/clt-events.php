@@ -62,6 +62,7 @@ if (class_exists('TNP_Composer') ) {
        TNP_Composer::register_block(CLT_EVENTS_DIR . '/inc/newsletter/blocks/clt-image');
      TNP_Composer::register_block(CLT_EVENTS_DIR . '/inc/newsletter/blocks/two-column-event');
        TNP_Composer::register_block(CLT_EVENTS_DIR . '/inc/newsletter/blocks/preheader-custom');
+       TNP_Composer::register_block(CLT_EVENTS_DIR . '/inc/newsletter/blocks/events-fetch');
               
 
         }

@@ -1,47 +1,100 @@
 <?php
 /*
- * Name: events-fetch
- * Section: header
- * Description: Fetches events from CES pastes them here
+ * Name: CES events (auto import)
+ * Section: content
+ * Description: event information and link
+ *
  */
+
 /* @var $options array */
+/* @var $wpdb wpdb */
 
 $default_options = array(
-    'html'=>'<p style="text-align: left; font-size: 16px; font-family: Arial">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam vitae sodales nulla, nec blandit velit. Morbi feugiat imperdiet augue, vel mattis augue sagittis rutrum. Sed.</p>',
-    'font_family'=>'Helvetica, Arial, sans-serif',
-    'font_size'=>16,
-    'font_color'=>'#000000',
-    'block_padding_left'=>15,
-    'block_padding_right'=>15,
-    'block_padding_top' => 20,
-    'block_padding_bottom' => 20,
-    'block_background'=>'#ffffff'
+    'start_date' => (new DateTime())->modify('first day of this month')->format('Y-m-d'),
+    'end_date' => (new DateTime())->modify('last day of this month')->format('Y-m-d'),
+    'last_updated' => 'never',
+    'json' => null,
+    'block_padding_left' => 15,
+    'block_padding_right' => 15,
+    'block_padding_top' => 5,
+    'block_padding_bottom' => 5,
+    'block_background' => '#ffffff',
+    'font_family' => 'Helvetica, Arial, sans-serif',
+    'font_size' => 16,
+    'font_color' => '#000'
 );
 
+//$default_options['html'] = '';
 $options = array_merge($default_options, $options);
-/*
-$options['html'] = str_replace('<p>', '<p style="">', $options['html']);
-$style = 'font-family: ' . $options['font_family'] . ';font-size: ' . $options['font_size'] . 'px; color: <?php echo $options['font_color']?>;
-$options['html'] = str_replace('<p', '<p inline-class="text-p"', $options['html']);
- */
- ?>
+
+?>
+
+<?php
+    $ces_api = CES_API::get_instance();
+    $events = $ces_api->get_events([
+        'start_date' => $options['start_date'],
+        'end_date' => $options['end_date']
+    ]);
+?>
+
 <style>
-    .text-td {
+    .html-td {
         font-family: <?php echo $options['font_family']?>;
-        font-size: <?php echo $options['font_size']?>px;
-        color: <?php echo $options['font_color']?>;
-        line-height: 1.5;
-    }
-    .text-p {
-        font-family: <?php echo $options['font_family']?>;
-        font-size: <?php echo $options['font_size']?>px;
     }
 </style>
-<table width="100%" style="width: 100%!important" border="0" cellpadding="0" cellspacing="0">
-    <tr>
-        <td width="100%" valign="top" align="left" class="text-td">
-            <?php echo $options['html'] ?>
-        </td>
+<?php
+// Templating functions for this block
+function clt_tnp_block_events_fetch_render_th($event) { ?>
+    <th style="font-size: 18px; font-weight: bold;">
+        <?php echo (new DateTime($event['start_date']))->format('m/d'); ?>
+        -
+        <?php echo (new DateTime($event['end_date']))->format('m/d'); ?>
+    </th>
+<?php }
+
+function clt_tnp_block_events_fetch_render_cell($event) { ?>
+    <td width="50%" align="center" inline-class="html-td" >
+        <div style="border-right: solid #dddddd; border-right-width: 1px; padding: 15px; margin-bottom: 20px;"> 
+            <p style="font-size: 16px; line-height: 1.5; color: #0e5080;
+            font-weight: 700; min-height: 2em; margin-top: 0;">
+                <?php echo $event['title'] ?>
+            </p>
+            <p style="font-size: 16px; line-height: 1;">
+                <?php echo $event['delivery_styles'][0]['title']; ?>
+                <?php if(count($event['delivery_styles']) > 1): ?>
+                    <?php for($j = 1; $j < $event['delivery_styles']; $j++): ?>
+                        or <?php $event['delivery_styles'][$j]['title']; ?>
+                    <?php endfor; ?>
+                <?php endif; ?>
+            </p>
+            <p>
+                <a href=<?php echo CES_API::link_to_ces_event($event['id']);  ?> target="_blank">
+                    Register or get information
+                </a>
+            </p>
+        </div>
+    </td>
+<?php }
+?>
+<?php // Output the table structure ?>
+<table width="100%" cellpadding="0" align="center" cellspacing="0">
+    <?php $ct = count($events) ?>
+    <?php for ($i=0; $i < $ct ; $i += 2): ?>
+    <?php $second_safe = ($i + 1) < $ct; ?>
+        
+    <tr style="margin-bottom: 0;">
+        <?php clt_tnp_block_events_fetch_render_th($events[$i]); ?>
+        <?php if ($second_safe): ?>
+        <?php clt_tnp_block_events_fetch_render_th($events[$i + 1]); ?>
+        <?php endif; ?>
     </tr>
+    <tr style="margin-top: 0;">
+        <?php clt_tnp_block_events_fetch_render_cell($events[$i]); ?>
+        <?php if($second_safe): ?>
+        <?php clt_tnp_block_events_fetch_render_cell($events[$i + 1]); ?>
+        <?php endif; ?>
+    </tr>
+    <?php endfor; ?>
 </table>
+
 
