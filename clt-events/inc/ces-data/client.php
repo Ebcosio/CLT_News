@@ -69,7 +69,7 @@ class CES_API {
         // Validate arguments, fall back to default as needed
         $args['start_date'] = CES_API::merge_valid_date_param($defaults['start_date'], $args['start_date']);
         $args['end_date']   = CES_API::merge_valid_date_param($defaults['end_date'], $args['end_date']);
-        if (!is_numeric($args['limit'])) {
+        if (!array_key_exists('limit', $args) || !is_numeric($args['limit'])) {
             $args['limit'] = $defaults['limit'];
         }
         // Merge validated passed args with defaults.
