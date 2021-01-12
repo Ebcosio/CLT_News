@@ -42,5 +42,29 @@ $options = array_merge($default_options, $options);
 
 </table>
 
+<script>
+// Adds datepicker functionality. Note need for jquery-ui-datepicker dependency,
+// enqueued elsewhere.
+jQuery( function($) {
+    $("#options-start_date").datepicker({
+        dateFormat: "yy-mm-dd",
+        maxDate: new Date($("#options-end_date").val())
+    }).change(function(e){
+        // updates the other datepicker so it can't go below this new
+        // start date.
+        var newMinDate = $(this).datepicker( "getDate" );
+        $("#options-end_date").datepicker( "option", "minDate", newMinDate );
+    });
+    $("#options-end_date").datepicker({
+        dateFormat: "yy-mm-dd",
+        minDate: new Date($("#options-start_date").val())
+    }).change(function(e){
+        // updates the other datepicker so it can't go above this new
+        // end date.
+        var newMaxDate = $(this).datepicker( "getDate" );
+        $("#options-start_date").datepicker( "option", "maxDate", newMaxDate );
+    });
+} );
+</script>
 
 <?php $fields->block_commons() ?>
