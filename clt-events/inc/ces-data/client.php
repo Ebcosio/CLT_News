@@ -172,7 +172,7 @@ class CES_API {
             try {
                 $date = new DateTime($provided);
                 $date = $date->format('Y-m-d');
-            } catch (Exception $e) {
+            } catch (Error $e) {
                 $date = $default;
             }
         }
