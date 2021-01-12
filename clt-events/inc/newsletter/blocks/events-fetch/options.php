@@ -18,7 +18,7 @@ $options = array_merge($default_options, $options);
         display: none;
     }
 </style>
-<p>Note: clicking "apply" above will refetch and rerender the events.</p>
+<p>Note: clicking "apply" <em>or</em> "cancel" above will refetch and rerender the events.</p>
 <div class="tnp-field-row">
     <div class="tnp-field-col-2">
         <?php $fields->text('start_date', 'Start date') ?>
