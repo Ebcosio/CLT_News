@@ -45,16 +45,16 @@ $options = array_merge($default_options, $options);
 <?php
 // Templating functions for this block
 function clt_tnp_block_events_fetch_render_th($event) { ?>
-    <th style="font-size: 18px; font-weight: bold;">
+    <th style="font-size: 18px; font-weight: bold; padding-top: 15px;">
         <?php echo (new DateTime($event['start_date']))->format('m/d'); ?>
         -
         <?php echo (new DateTime($event['end_date']))->format('m/d'); ?>
     </th>
 <?php }
 
-function clt_tnp_block_events_fetch_render_cell($event) { ?>
+function clt_tnp_block_events_fetch_render_cell($event, $side_border) { ?>
     <td width="50%" align="center" inline-class="html-td" >
-        <div style="border-right: solid #dddddd; border-right-width: 1px; padding: 15px; margin-bottom: 20px;"> 
+        <div style="<?php echo ($side_border) ? "border-right: 1px solid #dddddd; border-right-width: 1px; padding: 15px; margin-bottom: 20px;" : "" ?>">
             <p style="font-size: 16px; line-height: 1.5; color: #0e5080;
             font-weight: 700; min-height: 2em; margin-top: 0;">
                 <?php echo $event['title'] ?>
@@ -88,10 +88,10 @@ function clt_tnp_block_events_fetch_render_cell($event) { ?>
         <?php clt_tnp_block_events_fetch_render_th($events[$i + 1]); ?>
         <?php endif; ?>
     </tr>
-    <tr style="margin-top: 0;">
-        <?php clt_tnp_block_events_fetch_render_cell($events[$i]); ?>
+    <tr style="border-bottom: 1px solid #dddddd;">
+        <?php clt_tnp_block_events_fetch_render_cell($events[$i], true); ?>
         <?php if($second_safe): ?>
-        <?php clt_tnp_block_events_fetch_render_cell($events[$i + 1]); ?>
+        <?php clt_tnp_block_events_fetch_render_cell($events[$i + 1], false); ?>
         <?php endif; ?>
     </tr>
     <?php endfor; ?>
