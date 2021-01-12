@@ -20,7 +20,8 @@ function ces_events_shortcode( $atts ) {
 		array(
 			'start_date' => null,
             'end_date'   => null,
-            'limit'      => 5,
+              'limit'      => -1, // Limits number of events displayed
+                                  // a negative value means "unlimited"
 		),
 		$atts,
 		'ces_events'
@@ -81,22 +82,19 @@ Ex:
         </div>
     </div>
     <?php $offer_registration = CES_API::should_offer_registration($event); ?>
-	    <?php $is_open = ($offer_registration) ? 'open' : 'closed'; ?>
-	   <p>
-		  Registration for this event is <?php echo $is_open  ?>
-	   </p>
+    
+   
+	   
 	    
     <a class="ces-event-register-link <?php echo (($offer_registration) ? 'register-link' : 'info-link'); ?>"
         target="_blank"
         href="<?php echo CES_API::link_to_ces_event($event['id']) ?>"
         aria-labelledby="title-heading-<?php echo esc_attr($event['id']); ?>"
     >
-            <?php if( $offer_registration ) : ?>
+            <?php if( $offer_registration ) { ?>
 		       
-                <?php _e('Register for this event', CLT_EVENTS_TRANS); ?>
-            <?php else : ?>
-                <? _e('Get information', CLT_EVENTS_TRANS); ?>
-            <?php endif; ?>
+                <?php _e('Register for this event', CLT_EVENTS_TRANS);} else { ?>
+            <?php  _e('Get information about this event', CLT_EVENTS_TRANS); } ?>  
     </a>
     <?php endforeach; ?>
 	</ul></div>

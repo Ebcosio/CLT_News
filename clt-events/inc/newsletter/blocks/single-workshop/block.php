@@ -1,31 +1,34 @@
 <?php
 /*
- * Name: Salutation for Dept. Chairs
+ * Name: Single Event
  * Section: content
- * Description: text with signature image
- *
+ * Description: event information and link
+ * 
  */
 
 /* @var $options array */
 /* @var $wpdb wpdb */
 
 $default_options = array(
-    'html'=>'',
+    'date'=>'date',
+    'title'=>'event title',
+    'info'=>'event information',
+    'link_text'=>'register or get information',
+    'event_href'=>'https://clt.odu.edu/events/',
     'block_padding_left' => 15,
     'block_padding_right' => 15,
     'block_padding_top' => 20,
-    'block_padding_bottom' => 10,
+    'block_padding_bottom' => 20,
     'block_background' => '#ffffff',
     'font_family' => 'Helvetica, Arial, sans-serif',
     'font_size' => 16,
     'font_color' => '#000'
 );
 
-$default_options['html'] = '
-<h3>Department Chairs:</h3>
-<p style="font-size: 16px">Please share this timely news with your faculty, adjuncts, and staff.</p>
-<p style="font-size: 16px">All the best,</p>
-<p style="font-weight: bold; font-size: 18px;"> M’hammed Abdous </p>';
+//$default_options['html'] = '';
+
+
+
 
 
 $options = array_merge($default_options, $options);
@@ -37,14 +40,20 @@ $options = array_merge($default_options, $options);
         font-size: <?php echo $options['font_size']?>px;
         color: <?php echo $options['font_color']?>;
     }
-
+    
 </style>
 <table width="100%" border="0" cellpadding="0" align="center" cellspacing="0">
     <tr>
         <td width="100%" valign="top" align="center" inline-class="html-td">
-            <?php echo $options['html'] ?>
-
+        
+            <p style="font-size: 18px; font-weight: bold;"> <?php echo $options['date'] ?></p>
+               <div style="line-height: 1;">
+            <p style="font-size: 16px;"> <?php echo $options['title'] ?> </p>
+            <p style="font-size: 16px;"> <?php echo $options['info'] ?> </p>
+            <p><a href=<?php echo $options['event_href']  ?> target="_blank"><?php echo $options['link_text'] ?></a></p>
+            </div>
         </td>
     </tr>
-
+    
 </table>
+

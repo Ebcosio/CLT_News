@@ -1,6 +1,6 @@
 <?php
 /*
- * Name: Salutation for Dept. Chairs
+ * Name: Signature
  * Section: content
  * Description: text with signature image
  * 

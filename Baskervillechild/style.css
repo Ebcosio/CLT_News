@@ -1,0 +1,36 @@
+/*
+Theme Name:   Baskervillechild
+Description:  custom child theme for CLT News
+Author:       ODU CLT
+Author URL:   Write here the author's blog or website url
+Template:     baskerville
+Version:      1.0
+License:      GNU General Public License v2 or later
+License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain:  Baskervillechild
+*/
+
+/* Write here your own personal stylesheet */
+
+/*
+.content.fleft {
+    width: 70%;
+}
+*/
+
+/*logo-link{display: block; max-width: 450px; margin-left: auto; margin-right: auto;}*/
+logo-link {display: block; max-width: 450px; margin-left: auto; margin-right: auto;}
+
+address {
+    margin-bottom: 50px;
+    font-style: normal;
+    line-height: 1;
+   
+	color: white;
+}
+
+
+div.footer {background-color: #003057;}
+
+
+
