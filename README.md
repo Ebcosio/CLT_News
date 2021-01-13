@@ -1,5 +1,13 @@
 # CLT News Site
 
+## Building
+
+To give consistent plugin and theme directory names, which the
+production WP installation will use to do things like save customizer
+settings, we have a simple build script, `build.sh`. Execute this with
+`./build.sh` or `bash build.sh`, then grab the zip files from the
+`./build` directory to install them on the prod environment.
+
 ## Development environment
 
 The development environment configuration included assumes a
