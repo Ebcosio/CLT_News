@@ -46,9 +46,21 @@ $options = array_merge($default_options, $options);
 // Templating functions for this block
 function clt_tnp_block_events_fetch_render_th($event) { ?>
     <th style="font-size: 18px; font-weight: bold; padding-top: 15px;">
-        <?php echo (new DateTime($event['start_date']))->format('m/d'); ?>
+        <?php
+        try {
+            echo (new DateTime($event['start_date']))->format('m/d');
+        } catch(Exception $e) {
+            echo '';
+        }
+        ?>
         -
-        <?php echo (new DateTime($event['end_date']))->format('m/d'); ?>
+        <?php
+        try {
+            echo (new DateTime($event['end_date']))->format('m/d');
+        } catch(Exception $e) {
+            echo '';
+        }
+        ?>
     </th>
 <?php }
 
@@ -57,13 +69,15 @@ function clt_tnp_block_events_fetch_render_cell($event, $side_border) { ?>
         <div style="<?php echo ($side_border) ? "border-right: 1px solid #dddddd; border-right-width: 1px; padding: 15px; margin-bottom: 20px;" : "" ?>">
             <p style="font-size: 16px; line-height: 1.5; color: #0e5080;
             font-weight: 700; min-height: 2em; margin-top: 0;">
-                <?php echo $event['title'] ?>
+                <?php echo esc_html( $event['title'] ); ?>
             </p>
             <p style="font-size: 16px; line-height: 1;">
-                <?php echo $event['delivery_styles'][0]['title']; ?>
+                <?php if( array_key_exists('delivery_styles', $event) && is_array($event['delivery_styles']) ): ?>
+                    <?php echo esc_html( $event['delivery_styles'][0]['title'] ); ?>
+                <?php endif; ?>
                 <?php if(count($event['delivery_styles']) > 1): ?>
                     <?php for($j = 1; $j < $event['delivery_styles']; $j++): ?>
-                        or <?php $event['delivery_styles'][$j]['title']; ?>
+                        or <?php echo esc_html( $event['delivery_styles'][$j]['title'] ); ?>
                     <?php endfor; ?>
                 <?php endif; ?>
             </p>
