@@ -23,6 +23,7 @@ require_once CLT_EVENTS_DIR . '/inc/utils/index.php';
 require_once CLT_EVENTS_DIR . '/inc/ces-data/client.php'; // Exposes CES_API globally.
 require_once CLT_EVENTS_DIR . '/inc/ces-data/templating.php';
 require_once CLT_EVENTS_DIR . '/inc/ces-data/event-cpt.php';
+require_once  CLT_EVENTS_DIR . '/inc/newsletter/index.php';
 
 // Flush permalinks on activation so our clt-events archive works
 // more: https://developer.wordpress.org/reference/functions/register_post_type/#flushing-rewrite-on-activation
@@ -49,25 +50,6 @@ function enqueue_accordion_style() {
 }
 
 add_action( 'wp_enqueue_scripts', 'enqueue_accordion_style' );
-
-// note, calling the TNP_Composer method from this file, the index; seems to not work when called from /newsletter directory
-function create_newsletter_blocks() {   
-if (class_exists('TNP_Composer') ) {
-        // Add our blocks, one-by-one
-    
-        TNP_Composer::register_block(CLT_EVENTS_DIR . '/inc/newsletter/blocks/register');
-       TNP_Composer::register_block(CLT_EVENTS_DIR . '/inc/newsletter/blocks/salutation-text');
-       TNP_Composer::register_block(CLT_EVENTS_DIR . '/inc/newsletter/blocks/signature-panel');
-        TNP_Composer::register_block(CLT_EVENTS_DIR . '/inc/newsletter/blocks/single-workshop');
-       TNP_Composer::register_block(CLT_EVENTS_DIR . '/inc/newsletter/blocks/clt-image');
-     TNP_Composer::register_block(CLT_EVENTS_DIR . '/inc/newsletter/blocks/two-column-event');
-       TNP_Composer::register_block(CLT_EVENTS_DIR . '/inc/newsletter/blocks/preheader-custom');
-              
-
-        }
-}
-add_action('newsletter_register_blocks', 'create_newsletter_blocks');
-
 
 
 ?>
