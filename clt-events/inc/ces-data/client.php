@@ -124,7 +124,7 @@ class CES_API {
      * @return string The link to CES's page for the given event
      */
     public static function link_to_ces_event($id) {
-        return 'https://clt.odu.edu/events/' . $id;
+        return esc_url('https://clt.odu.edu/events/' . $id);
     }
     
     /**
