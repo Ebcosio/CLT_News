@@ -35,7 +35,7 @@ div.footer {background-color: #003057;}
 
 /* Style OLC activity feed in sidebar */
 .widget-content .olc-activity ul.activity-list li::before {
-    content: none;
+    content: none; /* Removes default li styling under Baskerville*/
 }
 
 .olc-activity ul.activity-list li.activity-item {
