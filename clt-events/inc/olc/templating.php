@@ -35,13 +35,18 @@ function olc_buddypress_activity($atts) {
                 </a>
                 <p>
                     <?php echo $activity['title']; ?>
+                    <a class="time-since" href="<?php echo $activity['link'] ?>" rel="nofollow" >
+                        <?php echo clt_date_relative(new DateTime($activity['date'])) ?>
+                    </a>
                 </p>
 
                     <?php if ( clt_array_key_path_exists($activity, ['content', 'rendered']) &&
                         strlen($activity['content']['rendered']) > 0 ) : ?>
                         <p>
                             <?php echo clt_plain_text_excerpt($activity['content']['rendered']); ?>
-                            <a href="<?php echo esc_url($activity['link']); ?>" rel="nofollow">Read more</a>
+                            <a href="<?php echo esc_url($activity['link']); ?>" rel="nofollow" >
+                                Read more
+                            </a>
                         </p>
                     <?php endif; ?>   
             </li>

@@ -53,3 +53,11 @@ div.footer {background-color: #003057;}
     float: left;
     margin-right: 5%;
 }
+
+.olc-activity .time-since {
+    color: #494949;
+    font-size: 0.8em;
+}
+.olc-activity .time-since:hover {
+    color: #494949;
+}

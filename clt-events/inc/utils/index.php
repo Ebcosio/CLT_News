@@ -2,6 +2,7 @@
 defined('ABSPATH') || die;
 
 require_once CLT_EVENTS_DIR . 'inc/utils/array.php';
+require_once CLT_EVENTS_DIR . 'inc/utils/date.php';
 
 function clt_plain_text_excerpt($str, $word_limit = 45) {
     $str = strip_tags($str);
