@@ -25,11 +25,13 @@ function olc_buddypress_activity($atts) {
             $num_activities = count($recent_activity);
             for ($i = 0; $i < $num_activities; $i++):
                 $activity = $recent_activity[$i];
+                $user = $olc->get_user($activity['user_id']); // For profile links and name
         ?>
             <li class="activity-item">
-                <a href="<?php echo esc_url($activity['link']); ?>"
+                <a href="<?php echo esc_url($user['link']); ?>"
                   class="olc-profile-pic">
-                    <img src="<?php echo esc_url($activity['user_avatar']['thumb']) ?>" alt="User's profile picture">
+                    <img src="<?php echo esc_url($activity['user_avatar']['thumb']) ?>"
+                    alt="Profile picture for <?php echo esc_attr($user['name']); ?>">
                 </a>
                 <p>
                     <?php echo $activity['title']; ?>
