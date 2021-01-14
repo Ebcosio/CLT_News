@@ -25,6 +25,9 @@ require_once CLT_EVENTS_DIR . '/inc/ces-data/templating.php';
 require_once CLT_EVENTS_DIR . '/inc/ces-data/event-cpt.php';
 require_once  CLT_EVENTS_DIR . '/inc/newsletter/index.php';
 
+// OLC integrations
+require_once CLT_EVENTS_DIR . '/inc/olc/index.php';
+
 // Flush permalinks on activation so our clt-events archive works
 // more: https://developer.wordpress.org/reference/functions/register_post_type/#flushing-rewrite-on-activation
 register_activation_hook( __FILE__, 'clt_rewrite_flush' );
