@@ -38,6 +38,10 @@ div.footer {background-color: #003057;}
     content: none; /* Removes default li styling under Baskerville*/
 }
 
+.olc-activity ul.activity-list {
+    list-style: none;
+}
+
 .olc-activity ul.activity-list li.activity-item {
     position: relative;
     margin: 4% 0 10%;
