@@ -8,7 +8,7 @@ class OLC_WP_API {
     // Hold the class instance.
     private static $instance = null;
     private static $API_BASE = 'https://olc.clt.odu.edu/wp-json';
-    private $users_arr = []; // Keyed by BP user_login
+    private $users_arr = []; // Keyed by BP id
     
     // The constructor is private
     // to prevent initiation with outer code.
