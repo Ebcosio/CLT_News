@@ -54,10 +54,10 @@ div.footer {background-color: #003057;}
     margin-right: 5%;
 }
 
-.olc-activity .time-since {
+.olc-activity ul.activity-list li.activity-item .time-since {
     color: #494949;
     font-size: 0.8em;
 }
-.olc-activity .time-since:hover {
-    color: #494949;
+.olc-activity ul.activity-list li.activity-item .time-since:hover {
+    color: #383838;
 }
