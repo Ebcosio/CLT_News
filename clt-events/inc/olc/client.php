@@ -8,6 +8,7 @@ class OLC_WP_API {
     // Hold the class instance.
     private static $instance = null;
     private static $API_BASE = 'https://olc.clt.odu.edu/wp-json';
+    private $users_arr = []; // Keyed by BP user_login
     
     // The constructor is private
     // to prevent initiation with outer code.
@@ -34,9 +35,14 @@ class OLC_WP_API {
     }
 
     /**
-     * Gets events from the CES API
-     * Implementation note: this method is not static, so you need to call
+     * Gets events from the CES API.
+     * 
+     * Usage note: this method is not static, so you need to call
      * get_instance, then use the pointer you get to call this method.
+     * 
+     * NOTE: Without authentication, trying to `include` user profiles in
+     * the response results in a 401. There is a workaround, see this->get_user
+     * 
      * @param array $args Options -
      * type - array - LIMIT resutls to these types of activities (e.g. 'avatar_change')
      * @uses json_decode()
@@ -75,6 +81,62 @@ class OLC_WP_API {
         }
 
         return $events;
+    }
+
+    public function get_user(int $id, $args = []) {
+        
+        $defaults = [];
+        // Merge validated passed args with defaults.
+        $args = array_merge($defaults, $args);
+    
+        // Check data-strucutre cache, return if found.
+        // NOTE: this is simple. It might become necessary later to check if
+        // the supplied $args would invalidate the cache. Obviously, it doesn't
+        // make that check right now.
+        $instance_cache_key = strval( $id );
+        if ( array_key_exists($instance_cache_key, $this->users_arr) ) {
+            return $this->users_arr[ $instance_cache_key ];
+        }
+
+        // @TODO: check a WordPress transient cache
+    
+        // Prepare HTTP request
+        // This 401s:
+        // https://olc.clt.odu.edu/wp-json/buddypress/v1/members/11
+        // but this does not:
+        // https://olc.clt.odu.edu/wp-json/buddypress/v1/members/?per_page=1&include=11
+        $url = self::$API_BASE . '/buddypress/v1/members/?per_page=1&include=' . $id;    
+        
+        // DEBUG, to stop the request before it takes off
+        // return json_decode( "[]", true );
+
+        // Perform remote request
+        $response = wp_remote_get($url);
+
+        // Handle errors with network
+        if (is_wp_error($response) ||
+        (clt_array_key_path_exists($response, ['response', 'code']) && $response['response']['code']  >= 300  )
+        ) {
+            return -1;
+        }
+
+        // Parse user's array and simultaneously handle errors in body
+        $user_arr = json_decode( wp_remote_retrieve_body( $response ), true );
+        // json_decode returns null if it can't parse the JSON, also returns other types that we don't want
+        // Also ensures we have a user in the aray and the id property we need for cache
+        if (!is_array($user_arr) || !is_array($user_arr[0]) || !$user_arr[0]['id']) {
+            return -1;
+        }
+        // Pick lone user from the returned array
+        $user = $user_arr[0];
+
+        // Cache for future calls in this thread.
+        $instance_cache_key = strval( $user['id'] ); // sanity check
+        $this->users_arr[$instance_cache_key] = $user;
+
+        // @TODO: insert to WP transient cache (could totally be async if that's an option)
+
+        return $user;
     }
   }
 
