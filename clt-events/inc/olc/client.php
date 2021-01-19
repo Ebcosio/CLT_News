@@ -9,7 +9,7 @@ class OLC_WP_API {
     private static $instance = null;
     private static $API_BASE = 'https://olc.clt.odu.edu/wp-json';
     private $users_arr = []; // Keyed by BP id
-    
+
     // The constructor is private
     // to prevent initiation with outer code.
     private function __construct()
@@ -93,7 +93,7 @@ class OLC_WP_API {
         // NOTE: this is simple. It might become necessary later to check if
         // the supplied $args would invalidate the cache. Obviously, it doesn't
         // make that check right now.
-        $instance_cache_key = strval( $id );
+        $instance_cache_key = $id; // In the interest of readability, even if another var is allocated
         if ( array_key_exists($instance_cache_key, $this->users_arr) ) {
             return $this->users_arr[ $instance_cache_key ];
         }
@@ -105,6 +105,10 @@ class OLC_WP_API {
         // https://olc.clt.odu.edu/wp-json/buddypress/v1/members/11
         // but this does not:
         // https://olc.clt.odu.edu/wp-json/buddypress/v1/members/?per_page=1&include=11
+        // Note: when querying the API for individual's user profiles, we have to do it
+        // one at a time because we can't pass an array of user ids to `include`)
+        // Because it is the collection route (base for the resource), it will return the
+        // results as a JSON array.
         $url = self::$API_BASE . '/buddypress/v1/members/?per_page=1&include=' . $id;    
         
         // DEBUG, to stop the request before it takes off
@@ -127,11 +131,15 @@ class OLC_WP_API {
         if (!is_array($user_arr) || !is_array($user_arr[0]) || !$user_arr[0]['id']) {
             return -1;
         }
-        // Pick lone user from the returned array
+        // Pick lone user from the returned array (see comments at $url variable)
         $user = $user_arr[0];
 
-        // Cache for future calls in this thread.
-        $instance_cache_key = strval( $user['id'] ); // sanity check
+        // Cache response object for future calls in this thread.
+
+        // Sanity check on $instance_cache_key; even though it's already assigned from $id param,
+        // we don't assume that the API responded with the ID we asked for.
+        $instance_cache_key = $user['id'];
+        // Store the response in our data structure
         $this->users_arr[$instance_cache_key] = $user;
 
         // @TODO: insert to WP transient cache (could totally be async if that's an option)
