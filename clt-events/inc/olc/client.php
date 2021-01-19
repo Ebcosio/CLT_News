@@ -9,6 +9,7 @@ class OLC_WP_API {
     private static $instance = null;
     private static $API_BASE = 'https://olc.clt.odu.edu/wp-json';
     private $users_arr = []; // Keyed by BP id
+    private $activities = []; // Thread-level cache data structure for activities endpoint calls
 
     // The constructor is private
     // to prevent initiation with outer code.
@@ -55,6 +56,13 @@ class OLC_WP_API {
         ];
         // Merge validated passed args with defaults.
         $args = array_merge($defaults, $args);
+
+        // Check $this->activities array for a cached copy of the activity
+        // feed we requested, given the parameters supplied
+        $instance_cache_key = OLC_WP_API::build_activity_cache_key($args);
+        if ( array_key_exists($instance_cache_key, $this->activities) ) {
+            return $this->activities[ $instance_cache_key ];
+        }
     
         // Prepare request
         $url = self::$API_BASE . '/buddypress/v1/activity?per_page=' . $args['per_page'];    
@@ -80,7 +88,23 @@ class OLC_WP_API {
             return -1;
         }
 
+        // Store in the (singleton) class instance's thread-level memory cache for future requests
+        $this->activities[ $instance_cache_key ] = $events;
+
+        // var_dump($this->activities); // DEBUG
+
         return $events;
+    }
+
+    /**
+     * Returns a key for $this->activities which will be unique for all possible values provided to
+     * the documented key-value pairs of the $args array passed to $this->get_activity()
+     * @param array $args - the $args object, with defaults merged in, from $this->get_activity()
+     * @return string cache array key
+     */
+    private static function build_activity_cache_key($args): string {
+        // 'per_page' is the only argument at this time; others will be added later
+        return 'per_page=' . $args['per_page'];
     }
 
     public function get_user(int $id, $args = []) {
