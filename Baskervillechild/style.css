@@ -33,4 +33,31 @@ address {
 div.footer {background-color: #003057;}
 
 
+/* Style OLC activity feed in sidebar */
+.widget-content .olc-activity ul.activity-list li::before {
+    content: none; /* Removes default li styling under Baskerville*/
+}
 
+.olc-activity ul.activity-list {
+    list-style: none;
+}
+
+.olc-activity ul.activity-list li.activity-item {
+    position: relative;
+    margin: 4% 0 10%;
+    padding: 1%;
+}
+
+.olc-activity ul.activity-list li .olc-profile-pic {
+    display: block;
+    float: left;
+    margin-right: 5%;
+}
+
+.olc-activity ul.activity-list li.activity-item .time-since {
+    color: #494949;
+    font-size: 0.8em;
+}
+.olc-activity ul.activity-list li.activity-item .time-since:hover {
+    color: #383838;
+}
