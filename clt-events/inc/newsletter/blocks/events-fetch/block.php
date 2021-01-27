@@ -12,6 +12,7 @@
 $default_options = array(
     'start_date' => (new DateTime())->modify('first day of this month')->format('Y-m-d'),
     'end_date' => (new DateTime())->modify('last day of this month')->format('Y-m-d'),
+    'exclude_events' => '', // comma-separated list of integers, event ids for events that should be excluded
     'last_updated' => 'never',
     'json' => null,
     'block_padding_left' => 15,
@@ -33,7 +34,8 @@ $options = array_merge($default_options, $options);
     $ces_api = CES_API::get_instance();
     $events = $ces_api->get_events([
         'start_date' => $options['start_date'],
-        'end_date' => $options['end_date']
+        'end_date'   => $options['end_date'],
+        'exclude'    => explode(',', $options['exclude_events']) // get_events will handle incorrect type/empty array
     ]);
 ?>
 

@@ -29,6 +29,12 @@ $options = array_merge($default_options, $options);
 </div>
 
 <div class="tnp-field-row">
+    <div class="tnp-field-col-1">
+        <?php $fields->text('exclude_events', 'Exclude events (by ID, comma-separated)') ?>
+    </div>
+</div>
+
+<div class="tnp-field-row">
     <h3>General</h3>
 </div>
 <table class="form-table">
