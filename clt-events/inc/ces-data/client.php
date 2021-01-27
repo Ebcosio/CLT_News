@@ -65,6 +65,7 @@ class CES_API {
         // Should CES implement a limit parameter,
         // this code's behavior should be refactored to save bandwidth.
             'limit'      => -1,
+            'exclude'    => []
         ];
         // Validate arguments, fall back to default as needed
         $args['start_date'] = CES_API::merge_valid_date_param($defaults['start_date'], $args['start_date']);
@@ -72,6 +73,13 @@ class CES_API {
         if (!array_key_exists('limit', $args) || !is_numeric($args['limit'])) {
             $args['limit'] = $defaults['limit'];
         }
+
+        // Merge in exclude array if valid
+        if (!array_key_exists('exclude', $args) || !is_array($args['exclude']) ) {
+            $args['exclude'] = [];
+        }
+        $args['exclude'] = array_merge($defaults['exclude'], $args['exclude'] );
+
         // Merge validated passed args with defaults.
         $args = array_merge($defaults, $args);
     
@@ -106,6 +114,9 @@ class CES_API {
         if (!is_array($events)) {
             return -1;
         }
+
+        // Remove any excluded events from the array
+        CES_API::remove_excluded($events, $args['exclude']);
 
         // Handle limit on # of returned events
         // Move limit/pagination handling to API request parameters if they become available
@@ -177,6 +188,27 @@ class CES_API {
             }
         }
         return $date;
+    }
+
+    /**
+     * Removes events from $events_arr if their id properties are in the $exclude_arr
+     * @Pre: $event_arr produced as from CES_API::get_events method.
+     * @param array& $event_arr by reference for modification
+     * @param array& $exclude_arr list of event ids that need to be excluded,
+     *                pass-by-reference is for speed only- it's not modified
+     * @return void - modifies $event_arr as needed
+     */
+    private static function remove_excluded(&$event_arr, &$exclude_arr) {
+        $i=0;
+        while ($i < count($event_arr)) {
+            foreach($exclude_arr as $exc_id) {
+                if ( $event_arr[$i]['id'] == $exc_id) {
+                    array_splice($event_arr, $i, 1); // Remove this event from the array
+                    $i--; // To keep $i at current position for next iteration
+                }
+            }
+            $i++;
+        }
     }
 
   }
