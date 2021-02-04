@@ -71,14 +71,13 @@ function delivery_message($str){
 
 function clt_tnp_block_events_fetch_render_cell($event, $side_border) { ?>
    <td width="50%" align="center" inline-class="html-td" >
-       <div style="<?php echo ($side_border) ? "border-right: 1px solid #dddddd; border-right-width: 1px; padding: 15px;
-       padding-left: 20px; margin-bottom: 20px;" : "" ?>">
+       <div style=" padding: 15px; padding-left: 20px; margin-bottom: 10px; <?php echo ($side_border) ? "border-right: 1px solid #dddddd; border-right-width: 1px;" : "" ?>">
            <p style="font-size: 16px; line-height: 1.5; color: #0e5080;
            font-weight: 700; min-height: 2em; margin-top: 0;">
                <?php echo esc_html( $event['title'] ); ?>
            </p>
    <p style="font-size: 16px; line-height: 1;"><?php echo esc_html(split_dates($event['event_dates'])[0]); ?> - </p>
-   <p style="font-size: 16px; line-height: 1;"><?php echo esc_html(split_dates($event['event_dates'])[1]); ?></p>
+   <p style="font-size: 16px; line-height: 1; margin-top: 2px;"><?php echo esc_html(split_dates($event['event_dates'])[1]); ?></p>
 
 
 
