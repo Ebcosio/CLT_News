@@ -50,7 +50,8 @@ $options = array_merge($default_options, $options);
 
 
 </style>
-<table width="100%" cellpadding="0" align="center" cellspacing="0">
+<!-- removed inner divs from table cells as of May issue  -->
+<table style="width: 100%" align="center" cellspacing="0">
     
     <tr style="margin-bottom: 0;">
     <th style="font-size: 18px; font-weight: bold;"><?php echo $options['date'] ?></th>
@@ -58,31 +59,33 @@ $options = array_merge($default_options, $options);
   </tr>
     
     <tr style="margin-top: 0;">
-        <td width="50%"  align="center" inline-class="html-td" >
+        <td  align="center" style=" width: 50%; border-right: solid #dddddd; border-right-width: 1px; padding: 15px; margin-bottom: 20px; font-family: Helvetica, Arial, sans-serif;" >
  
-               <div style="border-right: solid #dddddd; border-right-width: 1px; padding: 15px; margin-bottom: 20px;">
+               <!--<div>-->
                 
             <p style="font-size: 16px; line-height: 1.5; color: #0e5080;
             font-weight: 700; min-height: 2em; margin-top: 0;"> <?php echo $options['title'] ?> </p>
             <p style="font-size: 16px; line-height: 1;"> <?php echo $options['info'] ?> </p>
             <p><a href=<?php echo $options['event_href']  ?> target="_blank"><?php echo $options['link_text'] ?></a></p>
+            
+         
 
-            </div>
+            <!--</div>-->
         </td>
 
-        <td width="50%"  align="center" inline-class="html-td">
+        <td align="center" style="width: 50%; line-height: 1; padding: 15px; margin-bottom: 20px; font-family: Helvetica, Arial, sans-serif;">
  
-               <div style="line-height: 1; padding: 15px; margin-bottom: 20px;">
+      
                 
             <p style="font-size: 16px; line-height: 1.5; color: #0e5080;
             font-weight: 700; min-height: 2em; margin-top: 0;"> <?php echo $options['title2'] ?> </p>
             <p style="font-size: 16px; line-height: 1;"> <?php echo $options['info2'] ?> </p>
             <p><a href=<?php echo $options['event_href2']  ?> target="_blank"><?php echo $options['link_text2'] ?></a></p>
 
-            </div>
+         
+           
         </td>
     </tr>
 
 
 </table>
-
